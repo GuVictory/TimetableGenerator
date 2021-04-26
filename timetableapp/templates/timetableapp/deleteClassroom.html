@@ -2,20 +2,17 @@
 {% load static %}
 {% block content %}
 
-    <div class="deleteBox">
-    <h3 id="deleteText">Do You want to delete "{{ delete.classroom_id }} - {{ delete.classroom_name }}"?</h3>
-        <form method="POST" action="{% url 'delete-classroom' delete.classroom_id %}">
-
-    <input class="deleteButton" type="submit" value="Delete">
+<div class="container-fluid d-flex p-4 min-vh-100 bg-light justify-content-center align-items-center flex-column">
+    <h3 id="deleteText">Вы хотите удалить аудиторию "{{ delete.classroom_id }} - {{ delete.classroom_name }}"?</h3>
+    <form method="POST" action="{% url 'delete-classroom' delete.classroom_id %}" class="mt-4 d-flex">
         {% csrf_token %}
-    <a href="{% url 'classroom-view' %}">
-    <input class="cancelButton" type="submit" value="Cancel">
-    </a>
+        <a href="{% url 'classroom-view' %}" class="btn btn-outline-secondary">
+            Отмена
+        </a>
+        <span style="width: 16px;"></span>
+        <input type="submit" value="Удалить" class="btn btn-danger">
     </form>
-        <div>
-     <img class="deletegif" alt="books" src="{% static 'media/12818-file-recover.gif' %}">
-            </div>
-    </div>
+</div>
 
 
 {% endblock %}

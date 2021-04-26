@@ -27,6 +27,10 @@ class Professor(models.Model):
     working_hours = models.IntegerField(null=True)
     available_hours = models.IntegerField(null=True, default=0)
 
+    def save(self, *args, **kwargs):
+        self.available_hours = self.working_hours
+        super(Professor, self).save(**kwargs)
+
     def __str__(self):
         return self.professor_name
 
@@ -61,9 +65,9 @@ class Class(models.Model):
     class_id = models.CharField(max_length=2000, primary_key=True)
     class_name = models.CharField(max_length=2000, null=True)
     week_day = MultiSelectField(
-        max_length=2000, choices=WEEK_DAY, max_choices=7)
-    start_time = models.PositiveIntegerField(null=True)
-    end_time = models.PositiveIntegerField(null=True)
+        max_length=2000, choices=WEEK_DAY, max_choices=5, default=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
+    start_time = models.PositiveIntegerField(null=True, default=8)
+    end_time = models.PositiveIntegerField(null=True, default=21)
 
     def __str__(self):
         return self.class_id  # + ' - ' + self.class_name
@@ -87,9 +91,6 @@ class SectionClassroom(models.Model):
     class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default="")
     classroom_id = models.ForeignKey(
         Classroom, on_delete=models.CASCADE, default="")
-
-    # def __str__(self):
-    #   return self.class_id #+ ' - ' + self.classroom_id
 
 
 # Модель для представления занятий

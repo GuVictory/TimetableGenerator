@@ -2,19 +2,19 @@
 {% load static %}
 {% block content %}
 
-    <div class="deleteBox">
-    <h3 id="deleteText">Do You want to delete "{{ course_delete.course_id }}-{{ course_delete.course_name }}"?</h3>
-        <form method="POST" action="{% url 'delete-course' course_delete.course_id %}">
+<div class="container-fluid d-flex p-4 min-vh-100 bg-light justify-content-center align-items-center flex-column">
+    <h3 id="deleteText">Вы правда хотите удалить курс "{{ course_delete.course_id }}-{{ course_delete.course_name }}"?</h3>
+        <form method="POST" action="{% url 'delete-course' course_delete.course_id %}" class="mt-4 d-flex">
+            {% csrf_token %}
 
-    <input class="deleteButton" type="submit" value="Delete">
-        {% csrf_token %}
-    <a href="{% url 'add-course' %}">
-    <input class="cancelButton" type="submit" value="Cancel">
-    </a>
-    </form>
-        <div>
-     <img class="deletegif" alt="books" src="{% static 'media/12818-file-recover.gif' %}">
-            </div>
+            <a href="{% url 'course_view' %}" class="btn btn-outline-secondary">
+                Отмена
+            </a>
+            <span style="width: 16px;"></span>
+            <input type="submit" value="Удалить" class="btn btn-danger">
+
+        </form>
+
     </div>
 
 

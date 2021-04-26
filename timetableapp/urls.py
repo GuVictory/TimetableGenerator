@@ -31,9 +31,7 @@ urlpatterns = [
          views.deleteClassroom, name='delete-classroom'),
     path('class-view/', views.ClassTable, name='class_view'),
     path('delete-class/<str:pk>/', views.deleteClass, name='delete-class'),
-    #path('timetable/', views.TimeTable, name='timetable'),
     path('generate-timetable/<str:id>/',
          views.GenerateTimeTable, name='generate-timetable'),
-    path('addweek-info/', views.WeekDayFormView, name='weekday-info'),
     path('timetable/<str:id>/', views.TimeTableView, name='timetable')
 ]

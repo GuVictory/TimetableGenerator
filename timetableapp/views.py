@@ -132,6 +132,8 @@ def ProfessorView(request):
         professor = ProfessorForm(request.POST)
         if professor.is_valid():
             messages.success(request, 'Professor has been added successfully.')
+            print(professor.data)
+            professor.data.available_hours = professor.data['working_hours'][0]
             professor.save()
         else:
             messages.success(
@@ -253,9 +255,10 @@ def ClassCourseView(request):
 def SectionRoomView(request):
     sectionroom = SectionClassroomForm()
     sectionrooms = SectionClassroom.objects.all()
+
     context = {'sectionroom': sectionroom, 'sectionrooms': sectionrooms}
     if request.method == 'POST':
-        sectionroom == SectionClassroomForm(request.POST)
+        sectionroom = SectionClassroomForm(request.POST)
         if sectionroom.is_valid():
             messages.success(request, "Room added for the class")
             sectionroom.save()
@@ -314,9 +317,9 @@ def WeekDayFormView(request):
         weekdayform = WeekDaysForm(request.POST)
         if weekdayform.is_valid():
             weekdayform.save()
-            messages.success(request, 'Class has been added.')
+            messages.success(request, 'Группа была добавлена.')
         else:
-            messages.error(request, 'Do not enter the same class ID')
+            messages.error(request, 'Не вводите одинаковые ID группы')
     return render(request, 'timetableapp/weekdays.html', context)
 
 

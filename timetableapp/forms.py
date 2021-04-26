@@ -35,7 +35,7 @@ class ClassroomForm(forms.ModelForm):
 class ClassForm(forms.ModelForm):
     class Meta:
         model = Class
-        fields = '__all__'
+        fields = ['class_id', 'class_name']
 
 
 class ClassCourseForm(forms.ModelForm):
