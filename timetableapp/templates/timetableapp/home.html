@@ -1,0 +1,90 @@
+{% extends 'timetableapp/main.html' %}
+
+{% block content %}
+
+    <div class="container-fluid d-flex p-4 flex-column bg-light min-vh-100">
+
+        <div class="m-2 p-4 shadow d-flex flex-column">
+            <h1 class="display-6">Генератор расписания</h1>
+            <p class="lead">Добро пожаловать, {{user.first_name}} 🖖!</p>
+            <p class="lead"> Данное приложение позволит вам создавать и администрировать расписание 🗓 для различных учебнех проектов!</p>
+
+            {% if auth %}
+            <p class="lead">{{user.first_name}}, теперь вы можете создать свой новый проект или дополнить уже существующий!</p>
+            {% else %}
+                <p class="lead">Для того чтобы создать прект вам нужно авторизоваться </p>
+                <div class='d-inline-flex justify-content-center w-100'>
+                    <a href="{% url 'login' %}" class="btn btn-primary w-25">
+                        Вход
+                    </a>
+                    <span style="width: 16px;"></span>
+                    <a href="{% url 'register' %}" class="btn btn-outline-primary w-25">
+                        Регистрация
+                    </a>
+                </div>
+            {% endif %}
+        
+        </div>
+
+
+        <div class="container d-flex mw-100 justify-content-between flex-wrap m-0 p-0">
+            <div id="courses" class="m-2 p-4 shadow d-flex flex-column justify-content-between" style="width: 47%;">
+                <h3>Курсы</h3>
+                    <p>Вы можете легко добавить новые курсы в базу данных, просто нажав на кнопку ниже 👇. Эти данные будут учтены во время создания расписания!</p>
+                    <div class="w-100 d-flex justify-content-end">
+                        <a  href="{% url 'add-course' %}" class="btn btn-outline-info">
+                            Добавить курс
+                        </a>
+                        <span style="width: 16px;"></span>
+                        <a href="{% url 'course_view' %}" class="btn btn-outline-secondary">Посмотреть созданные курсы</a>
+                    </div>
+                    
+            </div>
+    
+            <div class="m-2 m-2 p-4 shadow d-flex flex-column justify-content-between" style="width: 47%;">
+                <h3>Преподаватели</h3>
+                    <p>Данные о преподавателях 🧙🏽‍♂️ так же можно сохранить в базе данных.</p>
+                    
+                    <div class="w-100 d-flex justify-content-end">
+                        <a href="{% url 'add-professor' %}" class="btn btn-outline-success">
+                            Добавить преподавателя
+                        </a>
+                        <span style="width: 16px;"></span>
+                        <a href="{% url 'professor_view' %}" class="btn btn-outline-secondary">Добавленные перподователи</a>
+                    </div>
+            </div>
+    
+            <div id="courses" class="m-2 m-2 p-4 shadow d-flex flex-column justify-content-between" style="width: 47%;">
+                <h3>Аудитории</h3>
+                    <p>
+                      Можно добавлять различные аудитории 🏢 для проведения занятий, это будет учтено при создании расписания!
+                    </p>
+                    
+                    <div class="w-100 d-flex justify-content-end">
+                        <a href="{% url 'add-classroom' %}" class="btn btn-outline-danger">
+                            Добавить аудиторию
+                        </a>
+                        <span style="width: 16px;"></span>
+                        <a href="{% url 'classroom-view' %}" class="btn btn-outline-secondary">Существующие аудитории</a>
+                    </div>
+            </div>
+    
+            <div class="m-2 m-2 p-4 shadow d-flex flex-column justify-content-between" style="width: 47%;">
+                <h3>Учебные группы</h3>
+                    <p>
+                      В данном приложении вы можете добавить более одной учебной группы в одно время 🎯, это будет учтено при создании расписания.
+                    </p>
+    
+                    <div class="w-100 d-flex justify-content-end">
+                        <a href="{% url 'add-class' %}" class="btn btn-outline-warning">
+                            Добавить группу
+                        </a>
+                        <span style="width: 16px;"></span>
+                        <a href="{% url 'class_view' %}" class="btn btn-outline-secondary">Посмотреть созданные группы</a>
+                    </div>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

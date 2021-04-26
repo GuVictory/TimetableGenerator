@@ -120,6 +120,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    "/Users/guvictory/Documents/study/TimetableGenerator/TimetableGenerator"
 ]
 
 # Static files (CSS, JavaScript, Images)

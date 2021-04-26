@@ -1,0 +1,43 @@
+{% extends 'timetableapp/main.html' %}
+
+{% block content %}
+
+<div class="container-fluid d-flex p-4 min-vh-100 bg-light justify-content-center align-items-center">
+    
+	<div class="card p-4 shadow" style="height: max-content;">
+		<div>
+			<div class="d-flex justify-content-center mb-4">
+				<h3 id="form-title" class='display-6'>Авторизация</h3>
+			</div>
+			<div class="d-flex justify-content-center">
+				<form method="POST" action="">
+				{% csrf_token %}
+					<div class="input-group mb-3">
+						<label class="input-group-text" for="username"><i class="fas fa-user"></i></label>
+						<input type="text" name="username" placeholder="Логин..." class="form-control" id='username'>
+					</div>
+					<div class="input-group mb-2">
+						<label class="input-group-text" for="password"><i class="fas fa-key"></i></label>
+						<input type="password" name="password" placeholder="Пароль..." class="form-control" id='password'>
+					</div>
+
+					<div class="d-flex justify-content-center mt-3 login_container">
+						<input class="btn btn-primary" type="submit" value="Войти">
+					</div>
+				</form>
+			</div>
+			{% for message in messages %}
+				<p id="messages">{{message}}</p>
+			{% endfor %}
+
+			<div class="mt-4">
+				<div class="d-flex align-items-center flex-column">
+					<span class="mr-4"><small>Еще нет аккаунта?</small></span>
+					<a href="{% url 'register' %}"><small>Зарегистрироваться</small></a>
+				</div>
+		
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

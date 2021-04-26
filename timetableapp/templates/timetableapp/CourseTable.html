@@ -1,0 +1,87 @@
+{% extends 'timetableapp/main.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="container-fluid">
+
+    <div class="container d-flex justify-content-end mt-4 mb-4">
+        <div class="d-flex">
+
+            <a href="{% url 'selection' %}"><button class="btn btn-outline-primary">Назад</button></a>
+            <span style="width: 16px;"></span>
+            <a href="{% url 'add-course' %}"><button class="btn btn-primary">Создать новый курс</button></a>
+        </div>
+    </div>
+
+
+	<div class="table-responsive-lg">
+        <table class="table table-striped">
+            <thead class="thead-light">
+			<tr>
+                <div class="header__item filter__link" >
+                   <th scope="col" class="text-center">ID Курса</th>
+
+                </div>
+                <div class="header__item filter__link">
+                  <th class="text-center" scope="col">Название курса</th>
+
+                </div>
+                <div class="header__item filter__link">
+                   <th class="text-center" scope="col">Тип курса</th>
+
+                </div>
+                <div class="header__item filter__link" >
+                   <th class="text-center" scope="col">Выделленых часов</th>
+
+                </div>
+                <div class="header__item filter__link">
+                   <th class="text-center" scope="col">Учебных часов</th>
+
+                </div>
+                <div class="header__item filter__link">
+                    <th class="text-center" scope="col">Изменить</th>
+
+                </div>
+                <div class="header__item filter__link">
+                     <th class="text-center" scope="col">Удалить</th>
+
+                </div>
+			</tr>	
+            </thead>
+			
+            
+			
+                {% for corse in course %}
+				
+				<tr>
+                        <th scope="row" class="text-center">{{ corse.course_id }}</th>
+                    
+						<th scope="row" class="text-center"  >{{ corse.course_name }}</th>
+                       
+						<th scope="row" class="text-center">
+                            {% if corse.course_type == 'Theory' %}
+                            Лекция
+                            {% else %}
+                            Семинар
+                            {% endif %}
+                        </th>
+						<th scope="row" class="text-center"> {{ corse.credit_hours}}</th>
+                  
+                        <th scope="row" class="text-center"> {{ corse.contact_hours}}</th>
+                   
+                        <th scope="row" class="text-center"> <a href="{% url 'update-course' corse.course_id %}" class="btn btn-sm btn-outline-info">Update</a></th>
+                   
+                        <th scope="row" class="text-center"> <a href="{% url 'delete-course' corse.course_id %}" class="btn btn-sm btn-outline-danger" >Remove</a></th>
+                
+					</tr>
+				
+                
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+    </div>
+
+
+{% endblock %}

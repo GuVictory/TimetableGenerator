@@ -1,0 +1,58 @@
+{% extends 'timetableapp/main.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="container-fluid">
+
+    <div class="container d-flex justify-content-end mt-4 mb-4">
+        <div class="d-flex">
+
+            <a href="{% url 'selection' %}"><button class="btn btn-outline-primary">Назад</button></a>
+            <span style="width: 16px;"></span>
+            <a href="{% url 'add-professor' %}"><button class="btn btn-primary">Добавить преподавателя</button></a>
+        </div>
+    </div>
+
+
+
+    <div class="table-responsive-lg">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <div class="header__item filter__link" >
+                    <th scope="col" class="text-center">Имя преподователя</th>
+                </div>
+                <div class="header__item filter__link" >
+                    <th scope="col" class="text-center">Количесво рабочих часов</th>
+                </div>
+                <div class="header__item filter__link" >
+                    <th scope="col" class="text-center">Изменить</th>
+                </div>
+                <div class="header__item filter__link" >
+                    <th scope="col" class="text-center">Удалить</th>
+                </div>
+            </thead>
+
+            {% for prof in professor1 %}
+
+            <tr>
+                <th scope="row" class="text-center">{{ prof.professor_name }}</th>
+            
+                <th scope="row" class="text-center">{{ prof.working_hours}}</th>
+
+                <th scope="row" class="text-center">
+                    <a href="{% url 'update-professor' prof.professor_id %}" class="btn btn-sm btn-outline-info">Изменить</a>
+                </th>
+          
+                <th scope="row" class="text-center">
+                    <a href="{% url 'delete-professor' prof.professor_id %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                </th>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+
+    </div>
+
+{% endblock %}

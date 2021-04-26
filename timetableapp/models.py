@@ -5,8 +5,8 @@ from multiselectfield import MultiSelectField
 # Модель для представления курса
 class Course(models.Model):
     COURSE_TYPE = (
-        ('Theory', 'Theory'),
-        ('Lab', 'Lab')
+        ('Theory', 'Лекция'),
+        ('Lab', 'Семинар')
     )
 
     course_id = models.CharField(max_length=1000, primary_key=True)
@@ -25,7 +25,7 @@ class Professor(models.Model):
     professor_id = models.CharField(max_length=2000, primary_key=True)
     professor_name = models.CharField(max_length=2000, null=True)
     working_hours = models.IntegerField(null=True)
-    available_hours = models.IntegerField(null=True)
+    available_hours = models.IntegerField(null=True, default=0)
 
     def __str__(self):
         return self.professor_name
@@ -34,8 +34,8 @@ class Professor(models.Model):
 # Модель для представления аудитории
 class Classroom(models.Model):
     CLASSRoom_TYPE = (
-        ('Theory', 'Theory'),
-        ('Lab', 'Lab')
+        ('Theory', 'Лекционная'),
+        ('Lab', 'Семинарская')
     )
     classroom_id = models.CharField(max_length=2000, primary_key=True)
     classroom_name = models.CharField(max_length=2000, null=True)
@@ -66,7 +66,7 @@ class Class(models.Model):
     end_time = models.PositiveIntegerField(null=True)
 
     def __str__(self):
-        return self.class_id + ' - ' + self.class_name
+        return self.class_id  # + ' - ' + self.class_name
 
 
 # Модель для хранения курсов, которые ведутся в определенной учебной группе
@@ -88,8 +88,8 @@ class SectionClassroom(models.Model):
     classroom_id = models.ForeignKey(
         Classroom, on_delete=models.CASCADE, default="")
 
-    def __str__(self):
-        return self.class_id + ' - ' + self.classroom_id
+    # def __str__(self):
+    #   return self.class_id #+ ' - ' + self.classroom_id
 
 
 # Модель для представления занятий

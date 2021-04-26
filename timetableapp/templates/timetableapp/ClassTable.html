@@ -1,0 +1,79 @@
+{% extends 'timetableapp/main.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="container-fluid">
+
+    <div class="container d-flex justify-content-end mt-4 mb-4">
+        <div class="d-flex">
+
+            <a href="{% url 'selection' %}"><button class="btn btn-outline-primary">Назад</button></a>
+            <span style="width: 16px;"></span>
+            <a href="{% url 'add-class' %}"><button class="btn btn-primary">Добавить занятие</button></a>
+        </div>
+    </div>
+
+
+	<div class="table-responsive-lg">
+        <table class="table table-striped ">
+            <thead class="thead-light">
+			<tr>
+                <div class="header__item filter__link" >
+                   <th scope="col" class="text-center">ID Группы</th>
+
+                </div>
+                <div class="header__item filter__link">
+                  <th class="text-center" scope="col">Название группы</th>
+
+                </div>
+
+                <div class="header__item filter__link">
+                    <th class="text-center" scope="col">Изменить</th>
+
+                </div>
+                <div class="header__item filter__link">
+                     <th class="text-center" scope="col">Удалить</th>
+
+                </div>
+                <div class="header__item filter__link">
+                    <th class="text-center" scope="col">Создать расписание</th>
+
+                </div>
+                <div class="header__item filter__link">
+                    <th class="text-center" scope="col">Посмотреть расписание</th>
+
+                </div>
+			</tr>	
+            </thead>
+			
+            
+			
+                {% for section in sections %}
+				
+				    <tr>
+                
+					
+                        <th scope="row" class="text-center">{{ section.class_id }}</th>
+                    					
+						<th scope="row" class="text-center"  >{{ section.class_name }}</th>
+                  
+                        <th scope="row" class="text-center"> <a href="{% url 'update-classview' section.class_id %}" class="btn btn-sm btn-info">Изменить</a></th>
+                   
+                        <th scope="row" class="text-center"> <a href="{% url 'delete-class' section.class_id %}" class="btn btn-sm btn-danger" >Удалить</a></th>
+
+                        <th scope="row" class="text-center"> <a href="{% url 'generate-timetable' section.class_id %}" class="btn btn-sm btn-danger" >Создать расписание</a></th>
+                
+                        <th scope="row" class="text-center"> <a href="{% url 'timetable' section.class_id %}" class="btn btn-sm btn-danger">Посмотреть расписание</a></th>
+
+					</tr>
+				
+                
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+    </div>
+
+
+{% endblock %}
