@@ -6,5 +6,5 @@ import TimetableGenerator.settings
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # path('', include('timetableapp.urls')),
+    path('', include('timetableapp.urls')),
 ]
